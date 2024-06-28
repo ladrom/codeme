@@ -1,0 +1,168 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important; ;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.form {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 600px;
+  gap: 1rem;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.code {
+  height: 100%;
+  margin: 0 !important;
+  padding: 1em;
+}
+
+.units {
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid #B58F8E !important;
+  border-radius: 4px;
+  padding: 10px;
+
+}
+
+.unit {
+  cursor: pointer;
+}
+
+.code__container {
+  position: relative;
+  max-width: 600px;
+  height: 500px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  background-color: #F5F2F0;
+  padding-bottom: 1em;
+  margin-bottom: 16px;
+}
+
+.code__container:hover .clipboard__button,
+.code__container:hover .theme__button {
+  opacity: 1;
+}
+
+
+.clipboard__button {
+  position: absolute !important;
+  top: 10px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.theme__button {
+  position: absolute !important;
+  top: 60px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.add__button {
+  position: absolute !important;
+  top: 82px !important;
+  left: 32px !important;
+}
+
+.logo__link {
+  display: flex;
+  font-family: 'monospace';
+  font-weight: 700;
+  letter-spacing: .3rem;
+  color: inherit;
+  text-decoration: none;
+  font-size: 20px;
+  margin-right: 2rem;
+}
+
+.logo__link:hover {
+  color: inherit;
+}
+
+.logo__link--small {
+  display: none;
+  flex-grow: 1;
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: .3rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu__link {
+  color: white;
+  margin-right: 1rem;
+}
+
+.menu__link:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.menu__link--small {
+  color: black;
+}
+
+.menu__link--small:hover {
+  color: black;
+}
+
+p, li {
+  text-align: left;
+}
+
+@media screen and (max-width: 780px) {
+  .container {
+    flex-direction: column;
+  }
+  .code__container {
+    order: -1;
+    height: 350px;
+  }
+}
+
+.footer {
+  padding: 30px 0;
+  background-color: rgb(25,118,210);
+  color: white;
+}
+
+.footer a {
+  color: white;
+}
+
+.footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 900px) {
+  .logo__link {
+    display: none;
+  }
+
+  .logo__link--small {
+    display: flex;
+  }
+}
