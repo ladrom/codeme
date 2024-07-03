@@ -11,21 +11,15 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const pages = [{name: 'Gestion des codes', path: '/'}, {name: 'Mode d\'emploi', path: '/about'}];
+
+const pages = [{name: 'Gestion des codes', path: '/'}, {name: 'Rechercher', path: '/search'}, {name: 'Mode d\'emploi', path: '/about'}];
 const settings = ['Se déconnecter'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const navigate = useNavigate();
-  const goToHome = () => {
-    navigate('/');
-  };
-  const goToAbout = () => {
-    navigate('/about');
-  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

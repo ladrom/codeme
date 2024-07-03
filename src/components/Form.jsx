@@ -82,7 +82,7 @@ function Form({ codes, setCodes, codeUnit, setCodeUnit, editIndex, setEditIndex 
       <TextField
         id="filled-select-currency"
         select
-        label="Language"
+        label="Langage"
         defaultValue="javascript"
         helperText="Sélectionner un langage de programmation"
         variant="filled"

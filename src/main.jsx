@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import Wrapper from "./Wrapper.jsx";
 import About from "./components/About.jsx";
+import Search from "./components/Search.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,11 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />
+      },
+
+      {
+        path: "search",
+        element: <Search />
       }
     ]
   },
