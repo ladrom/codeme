@@ -3,6 +3,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import Snackbar from '@mui/material/Snackbar';
 import PropTypes from 'prop-types'
 import {useState} from "react";
+import {Alert} from "@mui/material";
 
 
 function Clipboard({ code }) {
@@ -34,7 +35,16 @@ function Clipboard({ code }) {
         onClose={handleClose}
         message="Contenu copié dans le presse-papiers"
         anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-      />
+      >
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          Contenu copié dans le presse-papiers
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

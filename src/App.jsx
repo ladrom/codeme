@@ -2,19 +2,15 @@ import './App.css'
 import Form from "./components/Form.jsx";
 import Code from "./components/Code.jsx";
 import {useEffect, useState} from "react";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 import {MenuItem} from "@mui/material";
 import TextField from "@mui/material/TextField";
+import {readCodeData} from "../database.js";
+import CodeList from "./components/CodeList.jsx";
 
 function App() {
   const [codes, setCodes] = useState([]);
-  const [selectOption, setSelectOption] = useState([]);
   const [filterFlag, setFilterFlag] = useState('');
   const [codeUnit, setCodeUnit] = useState({
     title: "",
@@ -23,27 +19,13 @@ function App() {
   });
   const [editIndex, setEditIndex] = useState(null);
 
-  useEffect(() => {
-    if (localStorage.getItem('codes') && JSON.parse(localStorage.getItem('codes')).length > 0) {
-      setCodes(JSON.parse(localStorage.getItem('codes')));
-    }
-    setSelectOption(getSelectOptions());
-  }, []);
 
   useEffect(() => {
-    localStorage.setItem('codes', JSON.stringify(codes));
-  }, [codes]);
-
-  function getSelectOptions() {
-    const objects = JSON.parse(localStorage.getItem("codes"));
-    const uniqueLanguages = new Set();
-
-    objects.forEach((item) => {
-      uniqueLanguages.add(item.language);
-    });
-
-    return Array.from(uniqueLanguages);
-  }
+    readCodeData()
+      .then(data => {
+        setCodes(data);
+      })
+  }, [])
 
   const onSelectOptionChange = (e) => {
     setFilterFlag(e.target.value)
@@ -57,22 +39,6 @@ function App() {
     });
     setEditIndex(null);
   }
-
-  function onDeleteCode(index) {
-    const updatedCodes = [...codes];
-    updatedCodes.splice(index, 1);
-    setCodeUnit({
-      title: "",
-      code: "",
-      language: "javascript"
-    })
-    setCodes(updatedCodes);
-  }
-
-  const onEditCode = (index) => {
-    setCodeUnit(codes[index]);
-    setEditIndex(index);
-  };
 
   return (
     <>
@@ -110,51 +76,19 @@ function App() {
         value={filterFlag}
       >
         <MenuItem value="">Tous les langages</MenuItem>
-        {selectOption.map((item, index) => (
-          <MenuItem key={index} value={item}>{item.toString().toUpperCase()}</MenuItem>
+        {codes.map((item, index) => (
+          <MenuItem key={index} value={item.language}>{item.language.toString().toUpperCase()}</MenuItem>
         ))}
       </TextField>
       {codes.length > 0 && (
-        <>
-          <h2>Code enregistré</h2>
-          <Stack className="units" direction="row" spacing={1}>
-            {codes.filter(item => {
-              if (!filterFlag) {
-                return true;
-              } else {
-                return filterFlag === item.language
-              }
-            }).map((code, index) => (
-              <ButtonGroup
-                variant="outlined"
-                aria-label="Basic button group"
-                key={index}
-              >
-                <Button
-                  className="unit"
-                  key={index}
-                  color="primary"
-                  onClick={() => {
-                    setEditIndex(null);
-                    setCodeUnit(code);
-                  }}
-                >
-                  {code.title}
-                </Button>
-                <Button
-                  onClick={() => onEditCode(index)}
-                >
-                  <EditIcon/>
-                </Button>
-                <Button
-                  onClick={() => onDeleteCode(index)}
-                >
-                  <DeleteIcon/>
-                </Button>
-              </ButtonGroup>
-            ))}
-          </Stack>
-        </>
+        <CodeList
+          codes={codes}
+          setCodes={setCodes}
+          filterFlag={filterFlag}
+          setEditIndex={setEditIndex}
+          setCodeUnit={setCodeUnit}
+          setFilterFlag={setFilterFlag}
+        />
       )}
     </>
   )

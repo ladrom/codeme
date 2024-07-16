@@ -4,10 +4,12 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Clipboard from "./Clipboard.jsx";
 import PropTypes from "prop-types";
 import ThemeCode from "./ThemeCode.jsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import Screenshot from "./Screenshot.jsx";
 
 function Code({ codeUnit }) {
   const [theme, setTheme] = useState("light");
+  const ToCaptureRef = useRef();
 
   useEffect(() => {
     if (localStorage.getItem("theme")) {
@@ -16,9 +18,11 @@ function Code({ codeUnit }) {
   }, [])
 
   return (
-    <div className="code__container">
+    <div
+      className="code__container"
+    >
       {codeUnit.code !== "" && (
-        <>
+        <div ref={ToCaptureRef}>
           <SyntaxHighlighter
             language={codeUnit.language}
             style={theme === "light" ? prism : dark}
@@ -31,7 +35,8 @@ function Code({ codeUnit }) {
           </SyntaxHighlighter>
           <Clipboard code={codeUnit.code}/>
           <ThemeCode theme={theme} setTheme={setTheme}/>
-        </>
+          <Screenshot ToCaptureRef={ToCaptureRef} />
+        </div>
       )}
     </div>
   )

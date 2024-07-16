@@ -30,6 +30,7 @@
 .code {
   margin: 0 !important;
   padding: 1em;
+  min-height: 8rem;
 }
 
 .units {
@@ -51,17 +52,16 @@
   max-width: 600px;
   flex-grow: 1;
   flex-shrink: 0;
-  padding-bottom: 1em;
-  margin-bottom: 16px;
   flex-basis: 50%;
 }
 
 .code__container--search {
-  margin: auto;
+  margin: 0 auto  16px;
 }
 
 .code__container:hover .clipboard__button,
-.code__container:hover .theme__button {
+.code__container:hover .theme__button,
+.code__container:hover .screnshot__button {
   opacity: 1;
 }
 
@@ -77,6 +77,14 @@
 .theme__button {
   position: absolute !important;
   top: 60px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.screnshot__button {
+  position: absolute !important;
+  top: 110px;
   right: 20px;
   opacity: 0;
   transition: opacity 0.5s;
@@ -139,6 +147,10 @@ p, li {
   max-width: 600px;
 }
 
+.pagination__container {
+  display: flex;
+}
+
 @media screen and (max-width: 780px) {
   .container {
     flex-direction: column;
@@ -151,6 +163,7 @@ p, li {
 }
 
 .footer {
+  margin-top: 20px;
   padding: 30px 0;
   background-color: rgb(25,118,210);
   color: white;
